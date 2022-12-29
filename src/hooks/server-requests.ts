@@ -1,7 +1,7 @@
 import { Message } from '../types/message';
 import { mockUsers } from '../assets/mockUsers'; // todo: remove this line after server implementation
 
-const endpoint = '../assets/'; // todo: add endpoint (server) address (starting with http://)
+const endpoint = 'http://localhost:3001'; // todo: add endpoint (server) address (starting with http://)
 
 
 /**
@@ -9,25 +9,23 @@ const endpoint = '../assets/'; // todo: add endpoint (server) address (starting 
  **/
 export async function getMessages() {
   // todo: replace this with fetch to get the messages from the server
-  const { mockMessages } = await import(`${endpoint}/mockMessages`);
+  const mockMessages = await fetch(`${endpoint}/mockMessages`)
+  .then((response)=>response.json())
+  .then((data)=> console.log(data));
+  
+}
 
   // todo: this should be implemented in the server. Chat Messages should already have the authors' names.
   // todo: remove this mapping when getting the data from the server
-  const mockMessagesWithNames = mockMessages.map((message: Message) => {
-    const author = mockUsers.find(user => user.id === message.authorId);
-    const authorName = author && author.name;
-    return { ...message, authorName };
-  });
-
-  return mockMessagesWithNames;
-}
 
 /**
  * GET request to get the full list of users - id + name
  **/
 export async function getUsers() {
   // todo: replace this with fetch to get the user list from the server
-  const { mockUsers } = await import(`${endpoint}/mockUsers`);
+  const  mockUsers  = await fetch(`${endpoint}/mockUsers`)
+  .then((response)=>response.json())
+  .then((data)=> console.log(data));;
   return mockUsers;
 }
 
