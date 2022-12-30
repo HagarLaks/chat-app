@@ -10,9 +10,9 @@ const endpoint = 'http://localhost:3001'; // todo: add endpoint (server) address
 export async function getMessages() {
   // todo: replace this with fetch to get the messages from the server
   const mockMessages = await fetch(`${endpoint}/mockMessages`)
-  .then((response)=>response.json())
-  .then((data)=> console.log(data));
-  
+  .then((response)=>response.json());
+  return mockMessages
+   
 }
 
   // todo: this should be implemented in the server. Chat Messages should already have the authors' names.
@@ -25,7 +25,7 @@ export async function getUsers() {
   // todo: replace this with fetch to get the user list from the server
   const  mockUsers  = await fetch(`${endpoint}/mockUsers`)
   .then((response)=>response.json())
-  .then((data)=> console.log(data));;
+ 
   return mockUsers;
 }
 
@@ -37,7 +37,7 @@ export async function getUserDetails(userId: number) {
   // todo: replace this with fetch to get the user details from the server.
   //  For mocking example, we're calling an external JSON service.
   //  You can use mockUserDetails.ts for the list of user details in the server.
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users?id=${userId}`);
+  const res = await fetch(`${endpoint}/user/${userId}`);
   return (await res.json())[0];
 }
 
@@ -46,6 +46,7 @@ export async function getUserDetails(userId: number) {
  **/
 export async function addNewMessage(message: Message) {
   // todo: implement sending a new message to the server
+  
 }
 
 /**

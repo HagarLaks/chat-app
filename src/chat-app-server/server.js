@@ -1,24 +1,13 @@
 import express from "express";
-
 import cors from "cors";
 // import {getNamesToMesseges} from './services.js';
 const app = express();
 const port = 3001;
 app.use(cors({ origin: 'http://localhost:5173' }));
 
-// app.get("/hello",(req,res)=>{
-//     return res.send("hello");
-// })
 app.listen(port,()=>{
     console.log(`App is listening to port ${port}`)
 })
-
-// app.get("/:num1/:num2/add",(req,res)=>{
-//     const num1 = req.params.num1;
-//     const num2 = req.params.num2;
-
-//     return res.send(num1+num2)
-// })
 
 app.get("/mockMessages",(req,res)=>{
     getNamesToMesseges();
@@ -27,6 +16,11 @@ app.get("/mockMessages",(req,res)=>{
 })
 
 app.get("/mockUsers",(req,res)=>{
+    return res.send(mockUserDetails);
+    
+})
+
+app.get("/user/:id",(req,res)=>{
     return res.send(mockUserDetails);
     
 })
