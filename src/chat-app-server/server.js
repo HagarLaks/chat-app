@@ -9,19 +9,24 @@ app.listen(port,()=>{
     console.log(`App is listening to port ${port}`)
 })
 
-app.get("/mockMessages",(req,res)=>{
+app.get("/messages",(req,res)=>{
     getNamesToMesseges();
     return res.send(getNamesToMesseges());
     
 })
 
-app.get("/mockUsers",(req,res)=>{
-    return res.send(mockUserDetails);
+app.get("/users",(req,res)=>{
+    
+  const userAndId = mockUserDetails.map(item => ({ name: item.name, id: item.id }));
+      console.log(userAndId)
+    return res.send(userAndId);
     
 })
 
 app.get("/user/:id",(req,res)=>{
-    return res.send(mockUserDetails);
+  const user = mockUserDetails.filter(item => item.id == req.params['id'])
+  console.log(user)
+    return res.send(user);
     
 })
 

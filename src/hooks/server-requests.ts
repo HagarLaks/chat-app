@@ -9,9 +9,9 @@ const endpoint = 'http://localhost:3001'; // todo: add endpoint (server) address
  **/
 export async function getMessages() {
   // todo: replace this with fetch to get the messages from the server
-  const mockMessages = await fetch(`${endpoint}/mockMessages`)
+  const messages = await fetch(`${endpoint}/messages`)
   .then((response)=>response.json());
-  return mockMessages
+  return messages
    
 }
 
@@ -23,10 +23,11 @@ export async function getMessages() {
  **/
 export async function getUsers() {
   // todo: replace this with fetch to get the user list from the server
-  const  mockUsers  = await fetch(`${endpoint}/mockUsers`)
+  const  users  = await fetch(`${endpoint}/users`)
   .then((response)=>response.json())
+  console.log(users,'users')
  
-  return mockUsers;
+  return users;
 }
 
 
