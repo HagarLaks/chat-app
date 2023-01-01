@@ -1,5 +1,4 @@
 import { Message } from '../types/message';
-import { mockUsers } from '../assets/mockUsers'; // todo: remove this line after server implementation
 
 const endpoint = 'http://localhost:3001'; // todo: add endpoint (server) address (starting with http://)
 
@@ -47,7 +46,16 @@ export async function getUserDetails(userId: number) {
  **/
 export async function addNewMessage(message: Message) {
   // todo: implement sending a new message to the server
-  
+  const response = await fetch(`${endpoint}/messages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(message)
+  });
+  const data = await response.json();
+  console.log(data, 'data')
+  return data;
 }
 
 /**

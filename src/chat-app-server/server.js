@@ -17,31 +17,36 @@ app.get("/messages",(req,res)=>{
 
 app.get("/users",(req,res)=>{
     
-  const userAndId = mockUserDetails.map(item => ({ name: item.name, id: item.id }));
+  const userAndId = userDetails.map(item => ({ name: item.name, id: item.id }));
       console.log(userAndId)
     return res.send(userAndId);
     
 })
 
 app.get("/user/:id",(req,res)=>{
-  const user = mockUserDetails.filter(item => item.id == req.params['id'])
+  const user = userDetails.filter(item => item.id == req.params['id'])
   console.log(user)
     return res.send(user);
     
 })
 
 function getNamesToMesseges() {
-        const mockMessagesWithNames = mockMessages.map((message) => {
-        const author = mockUserDetails.find(user => user.id === message.authorId);
+        const messagesWithNames = messages.map((message) => {
+        const author = userDetails.find(user => user.id === message.authorId);
         const authorName = author && author.name;
         return { ...message, authorName };
     });
 
-    return mockMessagesWithNames;
+    return messagesWithNames;
   }
+app.post('/messages', (req, res) => {
+    console.log(req.body)
+    res.send(messages);
+  });
+
   
 
-export const mockUserDetails = [
+export const userDetails = [
     {
       "id": 1,
       "name": "Leanne Graham",
@@ -113,8 +118,8 @@ export const mockUserDetails = [
     },
     {
       "id": 4,
-      "name": "Patricia Lebsack",
-      "username": "Karianne",
+      "name": "Hagar Laks",
+      "username": "Hagar",
       "email": "Julianne.OConner@kory.org",
       "address": {
         "street": "Hoeger Mall",
@@ -274,7 +279,7 @@ export const mockUserDetails = [
     }
   ];
 
-export const mockMessages = [
+export const messages = [
     {
       "authorId": 3,
       "id": 1,
